@@ -10,4 +10,8 @@
     <string name="coffeeLabel">Ordering Coffee!</string>
     <string name="yourOrderLabel">Your Basket</string>
     <string name="storeOrdersLabel">Store Orders</string>
+    <string name="placeOrder">Place Order</string>
+    <string name="yourOrders">Your Orders</string>
+    <string name="addToOrderCoffee">Add to Order</string>
+    <string name="placingOrder">Place Order</string>
 </resources>
