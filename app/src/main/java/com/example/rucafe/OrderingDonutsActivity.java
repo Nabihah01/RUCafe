@@ -1,4 +1,14 @@
 package com.example.rucafe;
 
-public class OrderingDonutsActivity {
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class OrderingDonutsActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.ordering_donuts);
+    }
 }

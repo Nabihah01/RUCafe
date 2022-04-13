@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">RUCafe</string>
+    <string name="RUCafe">RU CAFE</string>
+    <string name="orderDonut">Order Donuts</string>
+    <string name="orderDonuts">Order Donuts</string>
+    <string name="orderCoffee">Order Coffee</string>
+    <string name="yourOrder">Your Order</string>
+    <string name="storeOrders">Store Orders</string>
+    <string name="donutsLabel">Ordering Donuts!</string>
+    <string name="coffeeLabel">Ordering Coffee!</string>
+    <string name="yourOrderLabel">Your Basket</string>
+    <string name="storeOrdersLabel">Store Orders</string>
 </resources>
