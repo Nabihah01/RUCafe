@@ -14,4 +14,7 @@
     <string name="yourOrders">Your Orders</string>
     <string name="addToOrderCoffee">Add to Order</string>
     <string name="placingOrder">Place Order</string>
+    <string name="Oreo">Oreo</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
 </resources>
