@@ -1,4 +1,4 @@
-package com.example.project4;
+package com.example.rucafe;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Has three attributes - cupsize, addins, and quantity
  *  @author Nabihah, Maryam
  */
-public class Coffee extends MenuItem implements Customizable{
+public class Coffee extends MenuItem implements Customizable {
     private String cupSize;
     private ArrayList<String> addIns;
     private int quantity;

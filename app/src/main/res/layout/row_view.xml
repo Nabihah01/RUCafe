@@ -7,75 +7,74 @@
     android:background="#E6E2BD"
     android:id="@+id/rowLayout" >
 
-    <TextView
-        android:id="@+id/donut_flavor"
-        android:layout_width="124dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="#E61D61"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/donut_image"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/donut_image"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:contentDescription="TODO"
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E8277B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.006">
 
-    <Button
-        android:id="@+id/btn_minus"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:text="@string/minus"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/donut_flavor"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086"
-        tools:ignore="TouchTargetSizeCheck" />
+        <TextView
+            android:id="@+id/donut_flavor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/donut_image"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_add"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:text="@string/plus"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.968"
-        app:layout_constraintStart_toEndOf="@+id/donut_flavor"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086"
-        tools:ignore="TouchTargetSizeCheck" />
+        <ImageView
+            android:id="@+id/donut_image"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ImageContrastCheck"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/donut_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btn_minus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/donut_flavor"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/donut_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/donut_flavor"
+            app:layout_constraintTop_toBottomOf="@+id/donut_flavor" />
 
-    <TextView
-        android:id="@+id/donut_quantity"
-        android:layout_width="33dp"
-        android:layout_height="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_add"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toEndOf="@+id/btn_minus"
-        app:layout_constraintTop_toBottomOf="@+id/donut_price"
-        app:layout_constraintVertical_bias="0.047" />
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="47dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/plus"
+            android:textColor="#F8BBD0"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/donut_price"
+            app:layout_constraintTop_toTopOf="@+id/donut_price"
+            tools:ignore="TouchTargetSizeCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

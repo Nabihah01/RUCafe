@@ -80,10 +80,8 @@ public class DonutsAdapter {
             super(itemView);
             donut_flavor = itemView.findViewById(R.id.donut_flavor);
             donut_price = itemView.findViewById(R.id.donut_price);
-            donut_quantity = itemView.findViewById(R.id.donut_quantity);
             donut_image = itemView.findViewById(R.id.donut_image);
             btn_add = itemView.findViewById(R.id.btn_add);
-            btn_minus = itemView.findViewById(R.id.btn_minus)
             parentLayout = itemView.findViewById(R.id.rowLayout);
             setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
         }
@@ -104,7 +102,7 @@ public class DonutsAdapter {
                     alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             Toast.makeText(itemView.getContext(),
-                                    tv_name.getText().toString() + " added.", Toast.LENGTH_LONG).show();
+                                    donut_flavor.getText().toString() + " added.", Toast.LENGTH_LONG).show();
                         }
                         //handle the "NO" click
                     }).setNegativeButton("no", new DialogInterface.OnClickListener() {

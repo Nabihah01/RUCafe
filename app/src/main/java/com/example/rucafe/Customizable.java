@@ -1,4 +1,4 @@
-package com.example.project4;
+package com.example.rucafe;
 
 /**
  *  Java interface

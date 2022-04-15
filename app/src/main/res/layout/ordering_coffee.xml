@@ -5,6 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="42dp"
+        android:layout_height="38dp"
+        android:text="@string/plus"
+        tools:layout_editor_absoluteX="252dp"
+        tools:layout_editor_absoluteY="476dp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="42dp"
+        android:layout_height="38dp"
+        android:text="@string/minus"
+        tools:layout_editor_absoluteX="349dp"
+        tools:layout_editor_absoluteY="476dp" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="290dp"
@@ -40,6 +56,76 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/addToOrderCoffee"
-        tools:layout_editor_absoluteX="106dp"
-        tools:layout_editor_absoluteY="556dp" />
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="637dp" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="195dp"
+        android:layout_height="36dp"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="482dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox4"
+        android:layout_width="97dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/caramel"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox5"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2"
+        app:layout_constraintVertical_bias="0.545" />
+
+    <CheckBox
+        android:id="@+id/checkBox5"
+        android:layout_width="139dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="75dp"
+        android:text="@string/whipped_cream"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="97dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/milk"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox2"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="97dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/syrup"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox5"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="97dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/cream"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
