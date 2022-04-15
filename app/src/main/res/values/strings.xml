@@ -22,4 +22,11 @@
     <string name="caramel">Caramel</string>
     <string name="cream">Cream</string>
     <string name="whipped_cream">Whipped Cream</string>
+    <string name="orders_total">Total:</string>
+    <string name="your_orders_subtotal_label">Sub-Total:</string>
+    <string name="your_orders_salestax_label">Sales Tax:</string>
+    <string name="deleteItem">To delete an item from order, please select an item.</string>
+    <string name="store_orders">Store Orders</string>
+    <string name="cancel_store_order">Cancel Order</string>
+    <string name="order_num">Order Number</string>
 </resources>
