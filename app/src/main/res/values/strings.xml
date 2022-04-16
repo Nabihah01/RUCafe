@@ -29,4 +29,5 @@
     <string name="store_orders">Store Orders</string>
     <string name="cancel_store_order">Cancel Order</string>
     <string name="order_num">Order Number</string>
+    <string name="cup_size">"Cup Size: "</string>
 </resources>

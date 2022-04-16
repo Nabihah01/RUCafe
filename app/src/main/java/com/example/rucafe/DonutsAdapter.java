@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class DonutsAdapter {
+public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolder> {
     private Context context; //need the context to inflate the layout
     //items hold all of our donuts
     private ArrayList<Donut> items; //need the data binding to each row of RecyclerView
@@ -55,7 +55,7 @@ public class DonutsAdapter {
         //assign values for each row
         holder.donut_flavor.setText(items.get(position).getDonutTypeandFlavor());
         holder.donut_price.setText((int) items.get(position).itemPrice());
-        holder.donut_image.setImageResource(items.get(position).getImage());
+//        holder.donut_image.setImageResource(items.get(position).getImage());
     }
 
     /**
