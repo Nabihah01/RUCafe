@@ -1,5 +1,7 @@
 package com.example.rucafe;
 
+import java.util.ArrayList;
+
 /**
  * This class extends MenuItem and represents a donut object,
  * has three attributes- type, quantity, and flavor
@@ -43,7 +45,7 @@ public class Donut extends MenuItem {
     }
 
     public String getDonutTypeandFlavor() {
-        return donutFlavor + donutType;
+        return donutFlavor + " " + donutType;
     }
 
     /**
@@ -58,5 +60,25 @@ public class Donut extends MenuItem {
         } else {
             return this.donutFlavor + " " + this.donutType + " donut " + "(" + this.donutQuantity + ")";
         }
+    }
+
+    public static ArrayList<Donut> createDonutsList() {
+        ArrayList<Donut> donuts = new ArrayList<Donut>();
+        donuts.add(new Donut("Chocolate", "Donut Hole", 1));
+        donuts.add(new Donut("Glazed", "Donut Hole", 1));
+        donuts.add(new Donut("Jelly", "Donut Hole", 1));
+        donuts.add(new Donut("Blueberry Glazed", "Donut Hole", 1));
+
+        donuts.add(new Donut("Oreo", "Yeast", 1));
+        donuts.add(new Donut("Strawberry Frosted", "Yeast", 1));
+        donuts.add(new Donut("Vanilla Frosted", "Yeast", 1));
+        donuts.add(new Donut("Chocolate Creme", "Yeast", 1));
+
+        donuts.add(new Donut("Powdered", "Cake", 1));
+        donuts.add(new Donut("Old-Fashioned", "Cake", 1));
+        donuts.add(new Donut("Cinnamon Sugar", "Cake", 1));
+        donuts.add(new Donut("Lemon", "Cake", 1));
+
+        return donuts;
     }
 }

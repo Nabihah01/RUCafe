@@ -73,7 +73,7 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
     public static class ItemsHolder extends RecyclerView.ViewHolder {
         private TextView donut_flavor, donut_price, donut_quantity;
         private ImageView donut_image;
-        private Button btn_add, btn_minus;
+        private Button btn_add;
         private ConstraintLayout parentLayout; //this is the row layout
 
         public ItemsHolder(@NonNull View itemView) {
@@ -101,6 +101,10 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
                     //handle the "YES" click
                     alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
+                            String split[] = itemView.findViewById(R.id.donut_flavor).toString().split(" ");
+                            Donut donut = new Donut(split[1], split[0], 1);
+                            MainActivity.yourOrder.add(donut);
+
                             Toast.makeText(itemView.getContext(),
                                     donut_flavor.getText().toString() + " added.", Toast.LENGTH_LONG).show();
                         }

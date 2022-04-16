@@ -3,96 +3,88 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#E6E2BD">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="121dp"
+        android:layout_marginStart="111dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="102dp"
         android:text="@string/storeOrdersLabel"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/order_numbers"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/order_numbers"
-        android:layout_width="90dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="19dp"
-        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:layout_width="116dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="10dp"
+        android:contentDescription="@string/one"
+        app:layout_constraintBottom_toTopOf="@+id/store_orders_list"
+        app:layout_constraintEnd_toStartOf="@+id/store_total" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="106dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="19dp"
+        android:id="@+id/order_number"
+        android:layout_width="73dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="30dp"
         android:text="@string/order_num"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/store_orders_list"
         app:layout_constraintEnd_toStartOf="@+id/order_numbers"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.151" />
 
     <TextView
         android:id="@+id/store_orders_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="17dp"
-        android:text="TextView"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
+        android:layout_marginTop="113dp"
+        android:layout_marginEnd="35dp"
+        android:text="0.00"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/store_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/orders_total"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/store_orders_total"
-        app:layout_constraintStart_toEndOf="@+id/order_numbers"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <ListView
+        android:id="@+id/store_orders_list"
+        android:layout_width="409dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/store_orders_total" />
 
     <Button
         android:id="@+id/cancel_order"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="142dp"
-        android:layout_marginTop="1dp"
+        android:layout_width="166dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#E61D61"
+        android:onClick="cancelOrder"
         android:text="@string/cancel_store_order"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_dynamic" />
-
-    <ListView
-        android:layout_width="409dp"
-        android:layout_height="500dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="17dp"
-        app:layout_constraintBottom_toTopOf="@+id/cancel_order"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/store_orders_total" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

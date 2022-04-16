@@ -19,6 +19,7 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
     private ArrayAdapter<String> adapter;
     public String size = "";
     private TextView coffeeTotal;
+    private TextView coffeeQuantity;
     private int quantity = 1;
     ArrayList<String> addIns = new ArrayList<>();
     protected static final DecimalFormat df = new DecimalFormat("###,##0.00");
@@ -34,9 +35,11 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         spinner.setAdapter(adapter); //dynamically set the adapter that associates with the list of String.
         coffeeTotal = findViewById(R.id.coffee_total);
         coffeeTotal.setText(String.valueOf(1.69));
+        coffeeQuantity = findViewById(R.id.coffee_quantity);
+        coffeeQuantity.setText(String.valueOf(quantity));
     }
 
-    /**for spinner
+    /** for spinner
      * @param adapterView
      * @param view
      * @param i
@@ -57,13 +60,16 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
     }
     public void addCoffee(View v){
         quantity++;
+        coffeeQuantity.setText(quantity);
         Coffee coffeeOrder = new Coffee(size, addIns, quantity);
         double price = coffeeOrder.itemPrice();
         coffeeTotal.setText(String.valueOf(df.format(price)));
+
     }
 
     public void removeCoffee(View v){
         quantity--;
+        coffeeQuantity.setText(quantity);
         Coffee coffeeOrder = new Coffee(size, addIns, quantity);
         double price = coffeeOrder.itemPrice();
         coffeeTotal.setText(String.valueOf(df.format(price)));
@@ -71,7 +77,7 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
     }
 
     public void milkClicked(View v) {
-        CheckBox checkBox = (CheckBox)v;
+        CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
             addIns.add("milk");
         }
@@ -85,7 +91,7 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
     public void creamClicked(View v) {
-        CheckBox checkBox = (CheckBox)v;
+        CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
             addIns.add("cream");
         }
@@ -99,7 +105,7 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
     public void whippedClicked(View v) {
-        CheckBox checkBox = (CheckBox)v;
+        CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
             addIns.add("whipped cream");
         }
@@ -113,7 +119,7 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
     public void syrupClicked(View v) {
-        CheckBox checkBox = (CheckBox)v;
+        CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
             addIns.add("syrup");
         }
@@ -127,7 +133,7 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
     public void caramelClicked(View v) {
-        CheckBox checkBox = (CheckBox)v;
+        CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
             addIns.add("caramel");
         }
@@ -142,7 +148,8 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
     }
     public void addToOrderCoffee(View v){
         Coffee coffeeOrder = new Coffee(size, (ArrayList<String>) addIns.clone(), quantity);
-        //mainController.addToOrder(coffeeOrder);
+        MainActivity.yourOrder.add(coffeeOrder);
+
         CheckBox whipped = findViewById(R.id.whipped_checkbox);
         CheckBox cream = findViewById(R.id.cream_checkbox);
         CheckBox caramel = findViewById(R.id.caramel_checkbox);
@@ -156,6 +163,7 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         spinner.setAdapter(adapter);
         quantity = 1;
         coffeeTotal.setText(String.valueOf(1.69));
+        coffeeQuantity.setText(String.valueOf(1));
         addIns.clear();
     }
 }
