@@ -1,19 +1,23 @@
 package com.example.rucafe;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class OrderingCoffeeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class OrderingCoffeeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener{
     private Spinner spinner;
     private String [] sizes = {"Short", "Tall", "Grande", "Venti"};
     private ArrayAdapter<String> adapter;
@@ -37,8 +41,32 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         coffeeTotal.setText(String.valueOf(1.69));
         coffeeQuantity = findViewById(R.id.coffee_quantity);
         coffeeQuantity.setText(String.valueOf(quantity));
+        Button add = findViewById(R.id.add_coffee);
+        Button remove = findViewById(R.id.remove_coffee);
+        add.setOnClickListener(this);
+        remove.setOnClickListener(this);
+
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.add_coffee:
+                quantity++;
+                coffeeQuantity.setText(String.valueOf(quantity));
+                Coffee coffeeOrder = new Coffee(size, addIns, quantity);
+                double price = coffeeOrder.itemPrice();
+                coffeeTotal.setText(String.valueOf(df.format(price)));
+                break;
+            case R.id.remove_coffee:
+                quantity--;
+                coffeeQuantity.setText(String.valueOf(quantity));
+                coffeeOrder = new Coffee(size, addIns, quantity);
+                price = coffeeOrder.itemPrice();
+                coffeeTotal.setText(String.valueOf(df.format(price)));
+                break;
+        }
+    }
     /** for spinner
      * @param adapterView
      * @param view
@@ -56,23 +84,6 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {//can leave empty
-
-    }
-    public void addCoffee(View v){
-        quantity++;
-        coffeeQuantity.setText(quantity);
-        Coffee coffeeOrder = new Coffee(size, addIns, quantity);
-        double price = coffeeOrder.itemPrice();
-        coffeeTotal.setText(String.valueOf(df.format(price)));
-
-    }
-
-    public void removeCoffee(View v){
-        quantity--;
-        coffeeQuantity.setText(quantity);
-        Coffee coffeeOrder = new Coffee(size, addIns, quantity);
-        double price = coffeeOrder.itemPrice();
-        coffeeTotal.setText(String.valueOf(df.format(price)));
 
     }
 
@@ -149,6 +160,24 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
     public void addToOrderCoffee(View v){
         Coffee coffeeOrder = new Coffee(size, (ArrayList<String>) addIns.clone(), quantity);
         MainActivity.yourOrder.add(coffeeOrder);
+        AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
+        alert.setTitle("Add To Order");
+        alert.setMessage(coffeeOrder.toString());
+        //handle the "YES" click
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(v.getContext(),
+                        coffeeOrder.toString()+ " added.", Toast.LENGTH_LONG).show();
+            }
+            //handle the "NO" click
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(v.getContext(),
+                        coffeeOrder.toString() + " not added.", Toast.LENGTH_LONG).show();
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
 
         CheckBox whipped = findViewById(R.id.whipped_checkbox);
         CheckBox cream = findViewById(R.id.cream_checkbox);
@@ -165,5 +194,6 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         coffeeTotal.setText(String.valueOf(1.69));
         coffeeQuantity.setText(String.valueOf(1));
         addIns.clear();
+
     }
 }
