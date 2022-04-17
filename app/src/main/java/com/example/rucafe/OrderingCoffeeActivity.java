@@ -159,13 +159,13 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
     }
     public void addToOrderCoffee(View v){
         Coffee coffeeOrder = new Coffee(size, (ArrayList<String>) addIns.clone(), quantity);
-        MainActivity.yourOrder.add(coffeeOrder);
         AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
         alert.setTitle("Add To Order");
         alert.setMessage(coffeeOrder.toString());
         //handle the "YES" click
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                MainActivity.yourOrder.add(coffeeOrder);
                 Toast.makeText(v.getContext(),
                         coffeeOrder.toString()+ " added.", Toast.LENGTH_LONG).show();
             }
