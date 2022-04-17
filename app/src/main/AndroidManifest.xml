@@ -13,26 +13,22 @@
             android:name=".OrderingDonutsActivity"
             android:label="@string/donutsLabel"
             android:parentActivityName=".MainActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".OrderingCoffeeActivity"
             android:label="@string/coffeeLabel"
             android:parentActivityName=".MainActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".YourOrderActivity"
             android:label="@string/yourOrderLabel"
             android:parentActivityName=".MainActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".StoreOrdersActivity"
             android:label="@string/storeOrdersLabel"
             android:parentActivityName=".MainActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

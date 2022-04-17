@@ -2,7 +2,6 @@ package com.example.rucafe;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +53,8 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
     public void onBindViewHolder(@NonNull ItemsHolder holder, int position) {
         //assign values for each row
         holder.donut_flavor.setText(items.get(position).getDonutTypeandFlavor());
-        holder.donut_price.setText((int) items.get(position).itemPrice());
-//        holder.donut_image.setImageResource(items.get(position).getImage());
+        holder.donut_price.setText(String.valueOf(items.get(position).itemPrice()));
+        holder.donut_image.setImageResource(items.get(position).getImage());
     }
 
     /**
@@ -73,52 +72,49 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
     public static class ItemsHolder extends RecyclerView.ViewHolder {
         private TextView donut_flavor, donut_price, donut_quantity;
         private ImageView donut_image;
-        private Button btn_add;
+        private Button btn_add, btn_minus;
         private ConstraintLayout parentLayout; //this is the row layout
 
         public ItemsHolder(@NonNull View itemView) {
             super(itemView);
             donut_flavor = itemView.findViewById(R.id.donut_flavor);
             donut_price = itemView.findViewById(R.id.donut_price);
+            donut_quantity = itemView.findViewById(R.id.donut_quantity);
             donut_image = itemView.findViewById(R.id.donut_image);
             btn_add = itemView.findViewById(R.id.btn_add);
+            btn_minus = itemView.findViewById(R.id.btn_minus);
             parentLayout = itemView.findViewById(R.id.rowLayout);
+            setMinusButtonOnClick(itemView);
             setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
         }
 
         /**
          * Set the onClickListener for the button on each row.
-         * Clicking on the button will create an AlertDialog with the options of YES/NO.
          * @param itemView
          */
         private void setAddButtonOnClick(@NonNull View itemView) {
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
-                    alert.setTitle("Add to order");
-                    alert.setMessage(donut_flavor.getText().toString());
-                    //handle the "YES" click
-                    alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            String split[] = itemView.findViewById(R.id.donut_flavor).toString().split(" ");
-                            Donut donut = new Donut(split[1], split[0], 1);
-                            MainActivity.yourOrder.add(donut);
-
-                            Toast.makeText(itemView.getContext(),
-                                    donut_flavor.getText().toString() + " added.", Toast.LENGTH_LONG).show();
-                        }
-                        //handle the "NO" click
-                    }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(),
-                                    donut_flavor.getText().toString() + " not added.", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    AlertDialog dialog = alert.create();
-                    dialog.show();
+                    int quantity = Integer.parseInt(donut_quantity.getText().toString());
+                    donut_quantity.setText(String.valueOf(quantity + 1));
                 }
             });
         }
+
+        private void setMinusButtonOnClick(@NonNull View itemView) {
+            btn_minus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int quantity = Integer.parseInt(donut_quantity.getText().toString());
+                    if(quantity == 0) {
+                        Toast.makeText(itemView.getContext(), "Cannot reduce quantity below zero", Toast.LENGTH_LONG).show();
+                    } else {
+                        donut_quantity.setText(String.valueOf(quantity - 1));
+                    }
+                }
+            });
+        }
+
     }
 }

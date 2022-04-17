@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#E6E2BD"
     android:id="@+id/rowLayout" >
 
@@ -25,19 +25,22 @@
         android:background="#E8277B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.006">
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/donut_flavor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="55dp"
-            android:layout_marginTop="24dp"
+            android:layout_width="261dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/donut_image"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,8 +55,8 @@
 
         <TextView
             android:id="@+id/donut_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="75dp"
+            android:layout_height="37dp"
             android:layout_marginTop="16dp"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -61,18 +64,52 @@
             app:layout_constraintTop_toBottomOf="@+id/donut_flavor" />
 
         <Button
-            android:id="@+id/btn_add"
+            android:id="@+id/btn_minus"
             android:layout_width="47dp"
             android:layout_height="43dp"
             android:layout_marginStart="32dp"
             android:layout_marginBottom="32dp"
-            android:text="@string/plus"
+            android:backgroundTint="#000000"
+            android:text="@string/minus"
             android:textColor="#F8BBD0"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/donut_price"
             app:layout_constraintTop_toTopOf="@+id/donut_price"
             tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="47dp"
+            android:layout_height="43dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="#000000"
+            android:text="@string/plus"
+            android:textColor="#F8BBD0"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.73"
+            app:layout_constraintStart_toEndOf="@+id/btn_minus"
+            app:layout_constraintTop_toTopOf="@+id/donut_price"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/donut_quantity"
+            android:layout_width="32dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/zero"
+            android:textAlignment="center"
+            android:textColor="#3E2723"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_add"
+            app:layout_constraintHorizontal_bias="0.428"
+            app:layout_constraintStart_toEndOf="@+id/btn_minus"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.8" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
