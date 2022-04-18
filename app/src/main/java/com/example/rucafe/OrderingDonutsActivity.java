@@ -58,4 +58,5 @@ public class OrderingDonutsActivity extends AppCompatActivity {
         donuts.add(new Donut("Cake", "Cinnamon Sugar", 1, R.drawable.cinnamon_sugar_cake_donut));
         donuts.add(new Donut("Cake", "Lemon", 1, R.drawable.lemon_cake_donut));
     }
+
 }

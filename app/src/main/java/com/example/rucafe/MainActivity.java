@@ -15,8 +15,8 @@ public class MainActivity extends AppCompatActivity {
     //key name has to be unique
     //getIntent in second class
     public static int orderNum = 1;
-    public static Order yourOrder;
-    public static StoreOrders storeOrders;
+    public static Order yourOrder =new Order(new ArrayList<>(), orderNum);
+    public static StoreOrders storeOrders = new StoreOrders();
     //private double price = 0;
 
 
@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        yourOrder = new Order(new ArrayList<>(), orderNum);
-        storeOrders = new StoreOrders();
+//        yourOrder = new Order(new ArrayList<>(), orderNum);
+//        storeOrders = new StoreOrders();
 
         Button donutsButton = findViewById(R.id.orderDonuts);
 

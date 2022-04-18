@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class YourOrderActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -30,7 +31,6 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
         setContentView(R.layout.your_order);
         listView = findViewById(R.id.your_order_list);
         listView.setOnItemClickListener(this);
-        //list not showing up!!
         adapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1, MainActivity.yourOrder.getOrders());
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -78,7 +78,7 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
                         "Order Placed.", Toast.LENGTH_LONG).show();
                 MainActivity.storeOrders.add(MainActivity.yourOrder);
                 MainActivity.orderNum++;
-                MainActivity.yourOrder.getOrders().clear();
+                MainActivity.yourOrder = new Order(new ArrayList<>(), MainActivity.orderNum);
                 subtotal.setText(String.valueOf("0.00"));
                 total.setText(String.valueOf("0.00"));
                 salesTax.setText(String.valueOf("0.00"));
