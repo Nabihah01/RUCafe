@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.sql.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,9 +77,11 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(v.getContext(),
                         "Order Placed.", Toast.LENGTH_LONG).show();
-                MainActivity.storeOrders.add(MainActivity.yourOrder);
+                Order order = new Order ((ArrayList<MenuItem>) MainActivity.yourOrder.getOrders().clone(), MainActivity.orderNum);
+                MainActivity.storeOrders.add(order);
                 MainActivity.orderNum++;
-                MainActivity.yourOrder = new Order(new ArrayList<>(), MainActivity.orderNum);
+                MainActivity.yourOrder.getOrders().clear();
+                MainActivity.yourOrder = new Order(new ArrayList<MenuItem>(), MainActivity.orderNum);
                 subtotal.setText(String.valueOf("0.00"));
                 total.setText(String.valueOf("0.00"));
                 salesTax.setText(String.valueOf("0.00"));

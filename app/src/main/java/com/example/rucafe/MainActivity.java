@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     //key name has to be unique
     //getIntent in second class
     public static int orderNum = 1;
-    public static Order yourOrder =new Order(new ArrayList<>(), orderNum);
+    public static Order yourOrder = new Order(new ArrayList<>(), orderNum);
     public static StoreOrders storeOrders = new StoreOrders();
     //private double price = 0;
 

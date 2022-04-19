@@ -32,11 +32,13 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ordering_coffee);
+
         spinner = findViewById(R.id.size_spinner);
         spinner.setOnItemSelectedListener(this);
         adapter = new ArrayAdapter<String>(this,
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sizes);
         spinner.setAdapter(adapter); //dynamically set the adapter that associates with the list of String.
+
         coffeeTotal = findViewById(R.id.coffee_total);
         coffeeTotal.setText(String.valueOf(1.69));
         coffeeQuantity = findViewById(R.id.coffee_quantity);
@@ -67,6 +69,7 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
                 break;
         }
     }
+
     /** for spinner
      * @param adapterView
      * @param view
@@ -101,6 +104,8 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         double price = coffee.itemPrice();
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
+
+
     public void creamClicked(View v) {
         CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
@@ -115,6 +120,8 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         double price = coffee.itemPrice();
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
+
+
     public void whippedClicked(View v) {
         CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
@@ -129,6 +136,8 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         double price = coffee.itemPrice();
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
+
+
     public void syrupClicked(View v) {
         CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
@@ -143,6 +152,8 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         double price = coffee.itemPrice();
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
+
+
     public void caramelClicked(View v) {
         CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
@@ -157,6 +168,8 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         double price = coffee.itemPrice();
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
+
+
     public void addToOrderCoffee(View v){
         Coffee coffeeOrder = new Coffee(size, (ArrayList<String>) addIns.clone(), quantity);
         AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());

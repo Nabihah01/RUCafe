@@ -13,16 +13,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoreOrdersActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+//check for when no orders are placed
+
+public class StoreOrdersActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
     private ListView listView;
-    private ArrayAdapter<MenuItem> list;
+    private ArrayAdapter<MenuItem> listAdapter;
     private Spinner spinner;
-    private ArrayAdapter<Integer> orderNums;
+    private ArrayAdapter<Integer> adapter;
+    private ArrayList<Integer> orderNums;
     private TextView orderTotal;
     protected static final DecimalFormat df = new DecimalFormat("###,##0.00");
 
@@ -30,29 +32,37 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.store_orders);
+
         spinner = findViewById(R.id.order_numbers);
-        spinner.setOnItemSelectedListener(this);//WHY ERORR?????
+        spinner.setOnItemSelectedListener(this);
+        orderNums = new ArrayList<>();
+
         for(int i = 0; i < MainActivity.storeOrders.getStoreOrdersArray().size(); i++){
             orderNums.add(MainActivity.storeOrders.getStoreOrdersArray().get(i).getOrderNumber());
         }
-        orderNums = new ArrayAdapter<Integer>(this,
-                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, (List<Integer>) orderNums);
-        spinner.setAdapter(orderNums);
-        orderNums.notifyDataSetChanged();
-        listView = findViewById(R.id.store_orders_list);
-        listView.setOnItemClickListener(this);
-        int currOrder = Integer.parseInt(spinner.getSelectedItem().toString());
-        double total = 0;
+        adapter = new ArrayAdapter<>(this,
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, orderNums);
+        spinner.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        int currOrder = orderNums.get(0);
         ArrayList<MenuItem> order = new ArrayList<>();
+        double total = 0.00;
         for(int i = 0 ; i < MainActivity.storeOrders.getStoreOrdersArray().size(); i++){
-            if(MainActivity.storeOrders.getStoreOrdersArray().get(i).getOrderNumber() == currOrder){
+            if(MainActivity.storeOrders.getStoreOrdersArray().get(i).getOrderNumber() == currOrder) {
                 order =  MainActivity.storeOrders.getStoreOrdersArray().get(i).getOrders();
                 total = MainActivity.storeOrders.getStoreOrdersArray().get(i).getTotal();
             }
         }
-        list = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1, order);
-        list.notifyDataSetChanged();
-        orderTotal.setText(String.valueOf(total));
+
+        listView = findViewById(R.id.store_orders_list);
+        listView.setOnItemClickListener(this);
+        listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, order);
+        listView.setAdapter(listAdapter);
+        listAdapter.notifyDataSetChanged();
+
+        orderTotal = findViewById(R.id.store_orders_total);
+        orderTotal.setText(df.format(total));
     }
 
     public void cancelOrder(View v) {
@@ -71,8 +81,8 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
                         orderNums.remove(num);
                     }
                 }
-                list.notifyDataSetChanged();
-                orderNums.notifyDataSetChanged();
+                listAdapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
 
             }
             //handle the "NO" click
@@ -87,7 +97,17 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        // event handler for selecting an order num
+    }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {  //can leave empty
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        //clicking an item in the listview
     }
 }
