@@ -124,7 +124,8 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
         }
         return -1;
     }
-
+    //added this bc price method in order class does not include salestax,
+    //there can be another way to fix this but for now :P
     private double calculateTotal(double price){
         return price*salesTax + price;
     }
