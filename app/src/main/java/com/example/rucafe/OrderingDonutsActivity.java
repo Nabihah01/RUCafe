@@ -1,7 +1,13 @@
 package com.example.rucafe;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class OrderingDonutsActivity extends AppCompatActivity {
+public class OrderingDonutsActivity extends AppCompatActivity implements View.OnClickListener {
 
     ArrayList<Donut> donuts = new ArrayList<>();
 
@@ -37,6 +43,9 @@ public class OrderingDonutsActivity extends AppCompatActivity {
         // Attach the adapter to the recyclerview to populate items
         donutsRV.setAdapter(adapter);
 
+        Button placeOrder = findViewById(R.id.place_order);
+        placeOrder.setOnClickListener(this);
+
     }
 
     /**
@@ -59,4 +68,27 @@ public class OrderingDonutsActivity extends AppCompatActivity {
         donuts.add(new Donut("Cake", "Lemon", 1, R.drawable.lemon_cake_donut));
     }
 
+    @Override
+    public void onClick(View view) {
+//        Donut donutOrder = new Donut();
+        AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
+        alert.setTitle("Add To Order");
+        //handle the "YES" click
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+//                MainActivity.yourOrder.add(donutOrder);
+                Toast.makeText(view.getContext(),
+                        " order added.", Toast.LENGTH_LONG).show();
+            }
+            //handle the "NO" click
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(view.getContext(),
+                        " order not added.", Toast.LENGTH_LONG).show();
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
+        //reset everything
+    }
 }

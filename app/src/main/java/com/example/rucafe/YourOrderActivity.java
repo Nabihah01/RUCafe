@@ -47,7 +47,7 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
         super.onStart();
         listView = findViewById(R.id.your_order_list);
         listView.setOnItemClickListener(this);
-        //list not showing up!!
+
         adapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1, MainActivity.yourOrder.getOrders());
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -108,7 +108,7 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
             public void onClick(DialogInterface dialog, int which) {
                 //remove the order that was selected
                 MenuItem item = MainActivity.yourOrder.getOrders().get(i);
-                MainActivity.yourOrder.remove(item);//idk if this is right either
+                MainActivity.yourOrder.remove(item);
                 adapter.notifyDataSetChanged();
                 displayOrderSubtotal();
                 Toast.makeText(adapterView.getContext(),

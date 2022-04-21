@@ -42,21 +42,21 @@
         android:id="@+id/orders_total_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="245dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="22dp"
+        android:layout_marginStart="149dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="26dp"
         android:text="@string/orders_total"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintEnd_toStartOf="@+id/orders_total"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/orders_salestax"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/orders_salestax_label" />
 
     <TextView
         android:id="@+id/orders_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="17dp"
         android:text="@string/zero_total"
         app:layout_constraintStart_toEndOf="@+id/orders_total_label"
         app:layout_constraintTop_toBottomOf="@+id/orders_salestax" />
@@ -65,13 +65,11 @@
         android:id="@+id/orders_subtotal_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="245dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="17dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="267dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="26dp"
         android:text="@string/your_orders_subtotal_label"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintBottom_toTopOf="@+id/orders_salestax_label"
         app:layout_constraintEnd_toStartOf="@+id/orders_subtotal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/yourOrders" />
@@ -80,9 +78,11 @@
         android:id="@+id/orders_subtotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="79dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="15dp"
         android:text="@string/zero_total"
+        app:layout_constraintBottom_toTopOf="@+id/orders_salestax"
         app:layout_constraintStart_toEndOf="@+id/orders_subtotal_label"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,45 +90,42 @@
         android:id="@+id/orders_salestax_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="235dp"
-        android:layout_marginEnd="17dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/your_orders_salestax_label"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBottom_toTopOf="@+id/orders_total_label"
-        app:layout_constraintEnd_toStartOf="@+id/orders_salestax"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/orders_total"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/orders_subtotal_label" />
 
     <TextView
         android:id="@+id/orders_salestax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="17dp"
         android:text="@string/zero_total"
-        app:layout_constraintBottom_toTopOf="@+id/orders_total"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/orders_salestax_label"
-        app:layout_constraintTop_toBottomOf="@+id/orders_subtotal"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/orders_subtotal" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="13dp"
-        android:text="@string/deleteItem"
+        android:layout_marginTop="36dp"
+        android:text="@string/deleteItem1"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orders_total_label" />
+        app:layout_constraintTop_toBottomOf="@+id/yourOrders" />
 
     <ListView
         android:id="@+id/your_order_list"
-        android:layout_width="411dp"
-        android:layout_height="458dp"
+        android:layout_width="388dp"
+        android:layout_height="432dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="1dp"
@@ -138,5 +135,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/deleteItem3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

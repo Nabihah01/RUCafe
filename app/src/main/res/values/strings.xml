@@ -34,4 +34,7 @@
     <string name="zero_total">0.00</string>
     <string name="pick_size">Pick a Size</string>
     <string name="one">1</string>
+    <string name="deleteItem1">To delete an item from order,</string>
+    <string name="deleteItem2" />
+    <string name="deleteItem3">please select an item.</string>
 </resources>
