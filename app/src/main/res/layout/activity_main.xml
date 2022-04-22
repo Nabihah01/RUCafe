@@ -12,65 +12,73 @@
         android:id="@+id/RUCafe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="49dp"
         android:background="#E6E2BD"
-        android:fontFamily="monospace"
+        android:fontFamily="serif"
         android:text="@string/RUCafe"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/orderCoffee"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/orderDonuts"
-        android:layout_width="184dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#E61D61"
-        android:onClick="orderingDonuts"
-        android:text="@string/orderDonut"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RUCafe"
-        app:strokeColor="#E4E4E4" />
-
-    <Button
+    <ImageButton
         android:id="@+id/orderCoffee"
-        android:layout_width="184dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#E61D61"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:layout_marginBottom="87dp"
+        android:adjustViewBounds="true"
         android:onClick="orderingCoffee"
-        android:text="@string/orderCoffee"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toTopOf="@+id/yourOrderButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderDonuts" />
+        app:layout_constraintStart_toEndOf="@+id/orderDonuts"
+        app:layout_constraintTop_toBottomOf="@+id/RUCafe"
+        app:srcCompat="@drawable/coffeebutton_main" />
 
-    <Button
-        android:id="@+id/yourOrder"
-        android:layout_width="184dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#E61D61"
+    <ImageButton
+        android:id="@+id/yourOrderButton"
+        android:layout_width="231dp"
+        android:layout_height="161dp"
+        android:layout_marginBottom="130dp"
+        android:adjustViewBounds="true"
         android:onClick="viewYourOrder"
-        android:text="@string/yourOrder"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderCoffee" />
+        app:layout_constraintTop_toBottomOf="@+id/orderCoffee"
+        app:srcCompat="@drawable/basket" />
 
-    <Button
-        android:id="@+id/storeOrders"
-        android:layout_width="187dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#E61D61"
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="189dp"
+        android:layout_height="163dp"
+        android:layout_marginTop="87dp"
+        android:layout_marginBottom="100dp"
+        android:adjustViewBounds="true"
         android:onClick="viewStoreOrders"
-        android:text="@string/storeOrders"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/yourOrderButton"
+        app:layout_constraintTop_toBottomOf="@+id/orderCoffee"
+        app:srcCompat="@drawable/store_orders_button" />
+
+    <ImageButton
+        android:id="@+id/orderDonuts"
+        android:layout_width="223dp"
+        android:layout_height="179dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginBottom="88dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toTopOf="@+id/yourOrderButton"
+        app:layout_constraintEnd_toStartOf="@+id/orderCoffee"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yourOrder"
-        app:layout_constraintVertical_bias="0.093" />
+        app:layout_constraintTop_toBottomOf="@+id/RUCafe"
+        app:srcCompat="@drawable/donut_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
