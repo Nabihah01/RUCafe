@@ -1,14 +1,12 @@
 package com.example.rucafe;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.app.AlertDialog;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolder> {
     private Context context; //need the context to inflate the layout
@@ -74,6 +73,8 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
         private ImageView donut_image;
         private Button btn_add, btn_minus;
         private ConstraintLayout parentLayout; //this is the row layout
+        //key: donut flavor + type, value = quantity
+        //public static HashMap<String, Integer> donutsOrdered = new HashMap<>();
 
         public ItemsHolder(@NonNull View itemView) {
             super(itemView);
@@ -96,8 +97,10 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    HashMap<String, Integer> donutsOrdered = OrderingDonutsActivity.getDonutsOrdered();
                     int quantity = Integer.parseInt(donut_quantity.getText().toString());
                     donut_quantity.setText(String.valueOf(quantity + 1));
+                    donutsOrdered.put(String.valueOf(donut_flavor.getText()), quantity + 1);
                 }
             });
         }
@@ -106,11 +109,13 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
             btn_minus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    HashMap<String, Integer> donutsOrdered = OrderingDonutsActivity.getDonutsOrdered();
                     int quantity = Integer.parseInt(donut_quantity.getText().toString());
                     if(quantity == 0) {
                         Toast.makeText(itemView.getContext(), "Cannot reduce quantity below zero", Toast.LENGTH_LONG).show();
                     } else {
                         donut_quantity.setText(String.valueOf(quantity - 1));
+                        donutsOrdered.put(String.valueOf(donut_flavor.getText()), quantity - 1);
                     }
                 }
             });
