@@ -55,6 +55,10 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
     }
 
     public void cancelOrder(View v) {
+        if(orderNums.isEmpty()){
+            Toast.makeText(v.getContext(), "No orders to cancel.", Toast.LENGTH_LONG).show();
+            return;
+        }
         AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
         alert.setTitle("Order");
         alert.setMessage("Cancel Order?");

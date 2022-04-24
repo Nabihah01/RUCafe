@@ -25,6 +25,8 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
     private TextView subtotal;
     private TextView total;
     protected static final DecimalFormat df = new DecimalFormat("###,##0.00");
+    private String zero_total = "0.00";
+    private double sales_tax = 6.625 / 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
         double subTotal = MainActivity.yourOrder.getPrice();
         subtotal.setText(String.valueOf(df.format(subTotal)));
 
-        double salestax = (6.625 / 100) * subTotal;
+        double salestax = sales_tax * subTotal;
         salesTax.setText(String.valueOf(df.format(salestax)));
 
         double t = subTotal + salestax;
@@ -70,6 +72,10 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void placeOrder(View v) {
+        if(MainActivity.yourOrder.getOrders().isEmpty()){
+            Toast.makeText(v.getContext(), "No orders to place.", Toast.LENGTH_LONG).show();
+            return;
+        }
         AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
         alert.setTitle("Place Order");
         //handle the "YES" click
@@ -82,9 +88,9 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
                 MainActivity.orderNum++;
                 MainActivity.yourOrder.getOrders().clear();
                 MainActivity.yourOrder = new Order(new ArrayList<MenuItem>(), MainActivity.orderNum);
-                subtotal.setText(String.valueOf("0.00"));
-                total.setText(String.valueOf("0.00"));
-                salesTax.setText(String.valueOf("0.00"));
+                subtotal.setText(String.valueOf(zero_total));
+                total.setText(String.valueOf(zero_total));
+                salesTax.setText(String.valueOf(zero_total));
                 adapter.notifyDataSetChanged();
 
             }

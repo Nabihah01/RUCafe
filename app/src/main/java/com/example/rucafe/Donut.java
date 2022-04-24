@@ -62,6 +62,10 @@ public class Donut extends MenuItem {
         return donutImage;
     }
 
+    public int getDonutQuantity() {
+        return donutQuantity;
+    }
+
     /**
      * overrides toString method and returns string form of
      * donut object

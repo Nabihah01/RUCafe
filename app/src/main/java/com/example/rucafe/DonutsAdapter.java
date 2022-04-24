@@ -53,6 +53,7 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
         //assign values for each row
         holder.donut_flavor.setText(items.get(position).getDonutTypeandFlavor());
         holder.donut_price.setText(String.valueOf(items.get(position).itemPrice()));
+        holder.donut_quantity.setText(String.valueOf(0));
         holder.donut_image.setImageResource(items.get(position).getImage());
     }
 
@@ -98,6 +99,8 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
                 @Override
                 public void onClick(View view) {
                     HashMap<String, Integer> donutsOrdered = OrderingDonutsActivity.getDonutsOrdered();
+                    int position = getAdapterPosition();
+                    System.out.println(position);
                     int quantity = Integer.parseInt(donut_quantity.getText().toString());
                     donut_quantity.setText(String.valueOf(quantity + 1));
                     donutsOrdered.put(String.valueOf(donut_flavor.getText()), quantity + 1);
@@ -122,4 +125,5 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
         }
 
     }
+
 }

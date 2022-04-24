@@ -122,4 +122,5 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
     public static HashMap<String, Integer> getDonutsOrdered() {
         return donutsOrdered;
     }
+
 }
