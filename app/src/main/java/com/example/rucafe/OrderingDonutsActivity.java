@@ -40,7 +40,9 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
         RecyclerView donutsRV = (RecyclerView) findViewById(R.id.donutsRecyclerView);
 
         // Initialize donuts
-        setUpMenuItems();
+        if(donuts.size() == 0) {
+            setUpMenuItems();
+        }
 
         // Set layout manager to position the items
         donutsRV.setLayoutManager(new LinearLayoutManager(this));
@@ -92,21 +94,8 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
                 addToOrder();
                 //reset everything
                 donutsOrdered.clear();
-                //donuts.clear();
                 resetMenuItems();
                 adapter.notifyDataSetChanged();
-                //finish();
-                //startActivity(getIntent());
-                //IDK WHAT TO DOOOO, IT KEEPS POPULATING TWICE
-
-//                donuts.clear();
-//                //adapter.notifyDataSetChanged();
-//                adapter = new DonutsAdapter(view.getContext(), donuts);
-//                donutsRV.setAdapter(adapter);
-//
-//                startActivity(getIntent());
-//                finish();
-//                overridePendingTransition(0, 0);
 
                 Toast.makeText(view.getContext(),
                         " order added.", Toast.LENGTH_LONG).show();
