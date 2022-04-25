@@ -4,20 +4,21 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.sql.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * This class processes the GUI from the your_order.xml to
+ * allow the user to view their order and cancel selected items from it.
+ *
+ * @author Nabihah, Maryam
+ **/
 public class YourOrderActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private ListView listView;
     private ArrayAdapter<MenuItem> adapter;
@@ -25,16 +26,21 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
     private TextView subtotal;
     private TextView total;
     protected static final DecimalFormat df = new DecimalFormat("###,##0.00");
-    private String zero_total = "0.00";
-    private double sales_tax = 6.625 / 100;
+    private static final String zero_total = "0.00";
+    private static final double sales_tax = 6.625 / 100;
 
+    /**
+     * overrirdes onCreate method and initializes listview to display user's order
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.your_order);
         listView = findViewById(R.id.your_order_list);
         listView.setOnItemClickListener(this);
-        adapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1, MainActivity.yourOrder.getOrders());
+        adapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1,
+                MainActivity.yourOrder.getOrders());
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -44,13 +50,17 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
         displayOrderSubtotal();
     }
 
+    /**
+     * overrides onStart method to initialize listview to display user's order
+     */
     @Override
     protected void onStart() {
         super.onStart();
         listView = findViewById(R.id.your_order_list);
         listView.setOnItemClickListener(this);
 
-        adapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1, MainActivity.yourOrder.getOrders());
+        adapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1,
+                MainActivity.yourOrder.getOrders());
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -60,6 +70,9 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
         displayOrderSubtotal();
     }
 
+    /**
+     * helper method to calculate subtotal, salestax, and total to display on screen.
+     */
     private void displayOrderSubtotal() {
         double subTotal = MainActivity.yourOrder.getPrice();
         subtotal.setText(String.valueOf(df.format(subTotal)));
@@ -71,6 +84,10 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
         total.setText(String.valueOf(df.format(t)));
     }
 
+    /**
+     * handles place order button click and adds order to store orders
+     * @param v instance of View
+     */
     public void placeOrder(View v) {
         if(MainActivity.yourOrder.getOrders().isEmpty()){
             Toast.makeText(v.getContext(), "No orders to place.", Toast.LENGTH_LONG).show();
@@ -83,7 +100,9 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(v.getContext(),
                         "Order Placed.", Toast.LENGTH_LONG).show();
-                Order order = new Order ((ArrayList<MenuItem>) MainActivity.yourOrder.getOrders().clone(), MainActivity.orderNum);
+                Order order = new Order
+                        ((ArrayList<MenuItem>) MainActivity.yourOrder.getOrders().clone(),
+                                MainActivity.orderNum);
                 MainActivity.storeOrders.add(order);
                 MainActivity.orderNum++;
                 MainActivity.yourOrder.getOrders().clear();
@@ -105,11 +124,18 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
         dialog.show();
     }
 
+    /**
+     * handles selecting item from listview and deletes from order.
+     * @param adapterView instance of AdapterView
+     * @param view instance of View
+     * @param i int
+     * @param l long
+     */
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         AlertDialog.Builder alert = new AlertDialog.Builder(adapterView.getContext());
-        alert.setTitle("Delete Item from Order");
-        //handle the "YES" click
+        alert.setTitle("Delete from Order");
+        alert.setMessage("Delete Selected Item from Order?");
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 //remove the order that was selected
@@ -120,7 +146,6 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
                 Toast.makeText(adapterView.getContext(),
                         "Item deleted from order.", Toast.LENGTH_LONG).show();
             }
-            //handle the "NO" click
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(adapterView.getContext(),

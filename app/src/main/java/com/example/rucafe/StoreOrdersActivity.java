@@ -15,10 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
-//check for when no orders are placed
-
+/**
+ * This class processes the GUI from the store_orders.xml in order to
+ * allow the user to view store orders and cancel selected orders.
+ *
+ * @author Nabihah, Maryam
+ **/
 public class StoreOrdersActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
     private ListView listView;
     private ArrayAdapter<MenuItem> listAdapter;
@@ -27,8 +30,15 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
     private ArrayList<Integer> orderNums;
     private TextView orderTotal;
     protected static final DecimalFormat df = new DecimalFormat("###,##0.00");
-    private final double salesTax = (6.625 / 100);
+    private static final double salesTax = (6.625 / 100);
+    private static final double zeroTotal = 0.00;
+    private static final int NOT_FOUND = -1;
+    private static final int firstOrderNum = 0;
 
+    /**
+     * overrides onCreate method and initializes spinner and listView
+     * @param savedInstanceState instance of Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +64,10 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
 
     }
 
+    /**
+     * Handles the cancel order button
+     * @param v instance of View
+     */
     public void cancelOrder(View v) {
         if(orderNums.isEmpty()){
             Toast.makeText(v.getContext(), "No orders to cancel.", Toast.LENGTH_LONG).show();
@@ -82,11 +96,15 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
         AlertDialog dialog = alert.create();
         dialog.show();
     }
+
+    /**
+     * Helper method to update spinner and listview
+     */
     private void update(){
         ArrayList<MenuItem> order = new ArrayList<>();
-        double total = 0.00;
+        double total = zeroTotal;
         if(!orderNums.isEmpty()) {
-            int currOrder = findIndex(orderNums.get(0));
+            int currOrder = findIndex(orderNums.get(firstOrderNum));
             order = MainActivity.storeOrders.getStoreOrdersArray().get(currOrder).getOrders();
             total = calculateTotal(MainActivity.storeOrders.getStoreOrdersArray().get(currOrder).getPrice());
         }
@@ -97,6 +115,14 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
         orderTotal.setText(String.valueOf(df.format(total)));
 
     }
+
+    /**
+     * changes current order view to selected order number and updates total
+     * @param adapterView instance of AdapterView
+     * @param view instance of View
+     * @param i int
+     * @param l long
+     */
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         int currOrder =  Integer.parseInt(spinner.getSelectedItem().toString());
@@ -111,25 +137,33 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {  //can leave empty
+    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        //clicking an item in the listview
     }
 
+    /**
+     * Helper method for finding order in store orders array.
+     * @param currOrder int ordernumber
+     * @return index of current order in array
+     */
     private int findIndex(int currOrder){
         for(int i = 0 ; i < MainActivity.storeOrders.getStoreOrdersArray().size(); i++){
             if(MainActivity.storeOrders.getStoreOrdersArray().get(i).getOrderNumber() == currOrder) {
                 return i;
             }
         }
-        return -1;
+        return NOT_FOUND;
     }
-    //added this bc price method in order class does not include salestax,
-    //there can be another way to fix this but for now :P
+
+    /**
+     * helper method to calculate total
+     * @param price total without sales tax applied
+     * @return total with sales tax applied
+     */
     private double calculateTotal(double price){
         return price*salesTax + price;
     }

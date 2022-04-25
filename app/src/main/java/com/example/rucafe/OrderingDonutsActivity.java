@@ -20,6 +20,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class processes the GUI from the ordering_donuts.xml in order to
+ * allow the user to add donut orders.
+ *
+ * @author Nabihah, Maryam
+ **/
 public class OrderingDonutsActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static ArrayList<Donut> donuts = new ArrayList<>();
@@ -35,22 +41,12 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ordering_donuts);
-
-        // Lookup the recyclerview in activity layout
         RecyclerView donutsRV = (RecyclerView) findViewById(R.id.donutsRecyclerView);
-
-        // Initialize donuts
-        if(donuts.size() == 0) {
+        if(donuts.isEmpty()) {
             setUpMenuItems();
         }
-
-        // Set layout manager to position the items
         donutsRV.setLayoutManager(new LinearLayoutManager(this));
-
-        // Create adapter passing in the sample user data
-        // DonutsAdapter adapter = new DonutsAdapter(this, donuts);
         adapter = new DonutsAdapter(this, donuts);
-        // Attach the adapter to the recyclerview to populate items
         donutsRV.setAdapter(adapter);
 
         Button placeOrder = findViewById(R.id.place_order);
@@ -78,45 +74,58 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
         donuts.add(new Donut("Cake", "Lemon", 0, R.drawable.lemon_cake_donut));
     }
 
+    /**
+     * Helper method to reset all donut quantities to zero.
+     */
     private void resetMenuItems() {
         for(int i = 0; i < donuts.size(); i++) {
             donuts.get(i).setDonutQuantity(0);
         }
     }
 
+    /**
+     * handles the add to order button click
+     * @param view instance of View
+     */
     @Override
     public void onClick(View view) {
+        if(donutsOrdered.isEmpty()){
+            Toast.makeText(view.getContext(),
+                    "Please select quantity for donuts", Toast.LENGTH_LONG).show();
+            return;
+        }
         AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
         alert.setTitle("Add To Order");
-        //handle the "YES" click
+        alert.setMessage("Add Donut(s) to Order?");
+
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 addToOrder();
-                //reset everything
+
                 donutsOrdered.clear();
                 resetMenuItems();
                 adapter.notifyDataSetChanged();
 
                 Toast.makeText(view.getContext(),
-                        " order added.", Toast.LENGTH_LONG).show();
+                        "Donut Order added.", Toast.LENGTH_LONG).show();
             }
-            //handle the "NO" click
+
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(view.getContext(),
-                        " order not added.", Toast.LENGTH_LONG).show();
+                        "Donut Order not added.", Toast.LENGTH_LONG).show();
             }
         });
         AlertDialog dialog = alert.create();
         dialog.show();
     }
-
+    /**
+     * helper method to add donut order to user orders.
+     */
     private void addToOrder() {
         HashMap<String, Integer> donutsOrder = (HashMap<String, Integer>) donutsOrdered.clone();
         for(Map.Entry<String, Integer> entry: donutsOrder.entrySet()) {
-            if(entry.getValue() == 0)
-                continue;
-            else {
+            if(entry.getValue() != 0){
                 String split[] = entry.getKey().split(" "); //splits string into flavor and type
                 Donut donut;
                 if(split[split.length - 1].equals("Hole")) {
@@ -129,6 +138,10 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
         }
     }
 
+    /**
+     * getter method for getDonutsOrdered HashMap
+     * @return HashMap of donutsOrdered
+     */
     public static HashMap<String, Integer> getDonutsOrdered() {
         return donutsOrdered;
     }

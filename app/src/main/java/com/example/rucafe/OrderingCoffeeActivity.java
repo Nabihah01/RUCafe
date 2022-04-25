@@ -11,11 +11,16 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+/**
+ * This class processes the GUI from the ordering_coffee.xml in order to
+ * allow the user to add and customize coffee order
+ *
+ * @author Nabihah, Maryam
+ **/
 
 public class OrderingCoffeeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener{
     private Spinner spinner;
@@ -25,9 +30,16 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
     private TextView coffeeTotal;
     private TextView coffeeQuantity;
     private int quantity = 1;
+    private static final double defaultTotal =  1.69;
+    private static final int defaultQuantity = 1;
+    private static final int zeroQuantity = 0;
     ArrayList<String> addIns = new ArrayList<>();
     protected static final DecimalFormat df = new DecimalFormat("###,##0.00");
 
+    /**
+     * overrides onCreate method and initializes adapters
+     * @param savedInstanceState instance of Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +52,7 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         spinner.setAdapter(adapter); //dynamically set the adapter that associates with the list of String.
 
         coffeeTotal = findViewById(R.id.coffee_total);
-        coffeeTotal.setText(String.valueOf(1.69));
+        coffeeTotal.setText(String.valueOf(defaultTotal));
         coffeeQuantity = findViewById(R.id.coffee_quantity);
         coffeeQuantity.setText(String.valueOf(quantity));
         Button add = findViewById(R.id.add_coffee);
@@ -50,6 +62,10 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
 
     }
 
+    /**
+     * Handles the button clicks for add and minus for coffee quantity
+     * @param v instance of View
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -61,6 +77,11 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
                 coffeeTotal.setText(String.valueOf(df.format(price)));
                 break;
             case R.id.remove_coffee:
+                if(quantity == zeroQuantity) {
+                    Toast.makeText(v.getContext(),
+                            "Cannot reduce quantity below zero", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 quantity--;
                 coffeeQuantity.setText(String.valueOf(quantity));
                 coffeeOrder = new Coffee(size, addIns, quantity);
@@ -70,11 +91,12 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         }
     }
 
-    /** for spinner
-     * @param adapterView
-     * @param view
-     * @param i
-     * @param l
+    /**
+     * method for handling spinner selection
+     * @param adapterView instance of AdapterView
+     * @param view instance of view
+     * @param i int
+     * @param l long
      */
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -86,10 +108,14 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {//can leave empty
+    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 
+    /**
+     * handles when milk checkbox is clicked
+     * @param v instance of View
+     */
     public void milkClicked(View v) {
         CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
@@ -105,7 +131,10 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
 
-
+    /**
+     * handles when cream checkbox is clicked
+     * @param v instance of View
+     */
     public void creamClicked(View v) {
         CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
@@ -121,7 +150,10 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
 
-
+    /**
+     * handles when whipped cream checkbox is clicked
+     * @param v instance of View
+     */
     public void whippedClicked(View v) {
         CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
@@ -137,7 +169,10 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
 
-
+    /**
+     * handles when syrup checkbox is clicked
+     * @param v instance of View
+     */
     public void syrupClicked(View v) {
         CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
@@ -153,7 +188,10 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
 
-
+    /**
+     * handles when caramel checkbox is clicked
+     * @param v instance of View
+     */
     public void caramelClicked(View v) {
         CheckBox checkBox = (CheckBox) v;
         if(checkBox.isChecked()){
@@ -169,8 +207,15 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
 
-
+    /**
+     * handles when add to order button is clicked
+     * @param v instance of View
+     */
     public void addToOrderCoffee(View v){
+        if(quantity == zeroQuantity){
+            Toast.makeText(v.getContext(), "Quantity cannot be zero", Toast.LENGTH_LONG).show();
+            return;
+        }
         Coffee coffeeOrder = new Coffee(size, (ArrayList<String>) addIns.clone(), quantity);
         AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
         alert.setTitle("Add To Order");
@@ -203,9 +248,9 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         syrup.setChecked(false);
         milk.setChecked(false);
         spinner.setAdapter(adapter);
-        quantity = 1;
-        coffeeTotal.setText(String.valueOf(1.69));
-        coffeeQuantity.setText(String.valueOf(1));
+        quantity = defaultQuantity;
+        coffeeTotal.setText(String.valueOf(defaultTotal));
+        coffeeQuantity.setText(String.valueOf(quantity));
         addIns.clear();
 
     }
