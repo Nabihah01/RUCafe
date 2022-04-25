@@ -22,7 +22,9 @@ import java.util.Map;
 
 public class OrderingDonutsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ArrayList<Donut> donuts = new ArrayList<>();
+    public static ArrayList<Donut> donuts = new ArrayList<>();
+    DonutsAdapter adapter;
+    RecyclerView donutsRV;
     static HashMap<String, Integer> donutsOrdered = new HashMap<>();
 
     /**
@@ -36,7 +38,7 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.ordering_donuts);
 
         // Lookup the recyclerview in activity layout
-        RecyclerView donutsRV = (RecyclerView) findViewById(R.id.donutsRecyclerView);
+        donutsRV = (RecyclerView) findViewById(R.id.donutsRecyclerView);
 
         // Initialize donuts
         setUpMenuItems();
@@ -45,7 +47,8 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
         donutsRV.setLayoutManager(new LinearLayoutManager(this));
 
         // Create adapter passing in the sample user data
-        DonutsAdapter adapter = new DonutsAdapter(this, donuts);
+        // DonutsAdapter adapter = new DonutsAdapter(this, donuts);
+        adapter = new DonutsAdapter(this, donuts);
         // Attach the adapter to the recyclerview to populate items
         donutsRV.setAdapter(adapter);
 
@@ -58,20 +61,26 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
      * Helper method to set up the data (the Model of the MVC).
      */
     private void setUpMenuItems() {
-        donuts.add(new Donut("Donut Hole", "Chocolate", 1, R.drawable.choc_donut_holes));
-        donuts.add(new Donut("Donut Hole", "Glazed", 1, R.drawable.glazed_donut_holes));
-        donuts.add(new Donut("Donut Hole", "Jelly", 1, R.drawable.jelly_donut_holes));
-        donuts.add(new Donut("Donut Hole", "Blueberry-Glazed", 1, R.drawable.blueberry_donut_holes));
+        donuts.add(new Donut("Donut Hole", "Chocolate", 0, R.drawable.choc_donut_holes));
+        donuts.add(new Donut("Donut Hole", "Glazed", 0, R.drawable.glazed_donut_holes));
+        donuts.add(new Donut("Donut Hole", "Jelly", 0, R.drawable.jelly_donut_holes));
+        donuts.add(new Donut("Donut Hole", "Blueberry-Glazed", 0, R.drawable.blueberry_donut_holes));
 
-        donuts.add(new Donut("Yeast", "Oreo", 1, R.drawable.oreo_yeast_donut));
-        donuts.add(new Donut("Yeast", "Strawberry-Frosted", 1, R.drawable.strawberry_yeast_donut));
-        donuts.add(new Donut("Yeast", "Vanilla-Frosted", 1, R.drawable.vanilla_yeast_donut));
-        donuts.add(new Donut("Yeast", "Chocolate-Creme", 1, R.drawable.choc_creme_donut));
+        donuts.add(new Donut("Yeast", "Oreo", 0, R.drawable.oreo_yeast_donut));
+        donuts.add(new Donut("Yeast", "Strawberry-Frosted", 0, R.drawable.strawberry_yeast_donut));
+        donuts.add(new Donut("Yeast", "Vanilla-Frosted", 0, R.drawable.vanilla_yeast_donut));
+        donuts.add(new Donut("Yeast", "Chocolate-Creme", 0, R.drawable.choc_creme_donut));
 
-        donuts.add(new Donut("Cake", "Powdered", 1, R.drawable.powdered_cake_donut));
-        donuts.add(new Donut("Cake", "Old-Fashioned", 1, R.drawable.old_fashioned_cake_donut));
-        donuts.add(new Donut("Cake", "Cinnamon-Sugar", 1, R.drawable.cinnamon_sugar_cake_donut));
-        donuts.add(new Donut("Cake", "Lemon", 1, R.drawable.lemon_cake_donut));
+        donuts.add(new Donut("Cake", "Powdered", 0, R.drawable.powdered_cake_donut));
+        donuts.add(new Donut("Cake", "Old-Fashioned", 0, R.drawable.old_fashioned_cake_donut));
+        donuts.add(new Donut("Cake", "Cinnamon-Sugar", 0, R.drawable.cinnamon_sugar_cake_donut));
+        donuts.add(new Donut("Cake", "Lemon", 0, R.drawable.lemon_cake_donut));
+    }
+
+    private void resetMenuItems() {
+        for(int i = 0; i < donuts.size(); i++) {
+            donuts.get(i).setDonutQuantity(0);
+        }
     }
 
     @Override
@@ -84,9 +93,19 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
                 addToOrder();
                 //reset everything
                 donutsOrdered.clear();
-                //IDK HOW TO RESET DONUT_QUANTITY TO ZEROOO THIS DOESNT WORK WE GET NULL PTR EXCEPTION
-//                TextView donut_quantity = view.findViewById(R.id.donut_quantity);
-//                donut_quantity.setText(String.valueOf(0));
+                resetMenuItems();
+
+                //IDK WHAT TO DOOOO, IT KEEPS POPULATING TWICE 
+
+//                donuts.clear();
+//                //adapter.notifyDataSetChanged();
+//                adapter = new DonutsAdapter(view.getContext(), donuts);
+//                donutsRV.setAdapter(adapter);
+//
+//                startActivity(getIntent());
+//                finish();
+//                overridePendingTransition(0, 0);
+
                 Toast.makeText(view.getContext(),
                         " order added.", Toast.LENGTH_LONG).show();
             }

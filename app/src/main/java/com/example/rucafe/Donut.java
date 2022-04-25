@@ -43,7 +43,7 @@ public class Donut extends MenuItem {
      * @return double, price of donut
      */
     @Override
-    public double itemPrice(){
+    public double itemPrice() {
         if(donutType.equals("Yeast")){
             return YEAST * donutQuantity;
         } else if (donutType.equals("Cake")) {
@@ -51,6 +51,17 @@ public class Donut extends MenuItem {
         }
         else {
             return HOLE * donutQuantity;
+        }
+    }
+
+    public double oneItemPrice() {
+        if(donutType.equals("Yeast")){
+            return YEAST;
+        } else if (donutType.equals("Cake")) {
+            return CAKE;
+        }
+        else {
+            return HOLE;
         }
     }
 
@@ -64,6 +75,10 @@ public class Donut extends MenuItem {
 
     public int getDonutQuantity() {
         return donutQuantity;
+    }
+
+    public void setDonutQuantity(int quantity) {
+        this.donutQuantity = quantity;
     }
 
     /**

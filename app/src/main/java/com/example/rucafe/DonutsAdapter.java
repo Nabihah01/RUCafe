@@ -13,13 +13,15 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolder> {
     private Context context; //need the context to inflate the layout
     //items hold all of our donuts
-    private ArrayList<Donut> items; //need the data binding to each row of RecyclerView
+    protected ArrayList<Donut> items; //need the data binding to each row of RecyclerView
 
     public DonutsAdapter(Context context, ArrayList<Donut> items) {
         this.context = context;
@@ -39,7 +41,7 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_view, parent, false);
 
-        return new ItemsHolder(view);
+        return new ItemsHolder(view, this);
     }
 
     /**
@@ -52,8 +54,8 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
     public void onBindViewHolder(@NonNull ItemsHolder holder, int position) {
         //assign values for each row
         holder.donut_flavor.setText(items.get(position).getDonutTypeandFlavor());
-        holder.donut_price.setText(String.valueOf(items.get(position).itemPrice()));
-        holder.donut_quantity.setText(String.valueOf(0));
+        holder.donut_price.setText(String.valueOf(items.get(position).oneItemPrice()));
+        holder.donut_quantity.setText(String.valueOf(items.get(position).getDonutQuantity()));
         holder.donut_image.setImageResource(items.get(position).getImage());
     }
 
@@ -70,15 +72,15 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
      * Get the views from the row layout file, similar to the onCreate() method.
      */
     public static class ItemsHolder extends RecyclerView.ViewHolder {
+        DonutsAdapter donutsAdapter;
         private TextView donut_flavor, donut_price, donut_quantity;
         private ImageView donut_image;
         private Button btn_add, btn_minus;
         private ConstraintLayout parentLayout; //this is the row layout
-        //key: donut flavor + type, value = quantity
-        //public static HashMap<String, Integer> donutsOrdered = new HashMap<>();
 
-        public ItemsHolder(@NonNull View itemView) {
+        public ItemsHolder(@NonNull View itemView, DonutsAdapter donutsAdapter) {
             super(itemView);
+            this.donutsAdapter = donutsAdapter;
             donut_flavor = itemView.findViewById(R.id.donut_flavor);
             donut_price = itemView.findViewById(R.id.donut_price);
             donut_quantity = itemView.findViewById(R.id.donut_quantity);
@@ -98,12 +100,12 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    HashMap<String, Integer> donutsOrdered = OrderingDonutsActivity.getDonutsOrdered();
                     int position = getAdapterPosition();
-                    System.out.println(position);
+                    HashMap<String, Integer> donutsOrdered = OrderingDonutsActivity.getDonutsOrdered();
                     int quantity = Integer.parseInt(donut_quantity.getText().toString());
                     donut_quantity.setText(String.valueOf(quantity + 1));
                     donutsOrdered.put(String.valueOf(donut_flavor.getText()), quantity + 1);
+                    donutsAdapter.items.get(position).setDonutQuantity(quantity + 1);
                 }
             });
         }
@@ -112,6 +114,7 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
             btn_minus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    int position = getAdapterPosition();
                     HashMap<String, Integer> donutsOrdered = OrderingDonutsActivity.getDonutsOrdered();
                     int quantity = Integer.parseInt(donut_quantity.getText().toString());
                     if(quantity == 0) {
@@ -119,6 +122,7 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
                     } else {
                         donut_quantity.setText(String.valueOf(quantity - 1));
                         donutsOrdered.put(String.valueOf(donut_flavor.getText()), quantity - 1);
+                        donutsAdapter.items.get(position).setDonutQuantity(quantity - 1);
                     }
                 }
             });
