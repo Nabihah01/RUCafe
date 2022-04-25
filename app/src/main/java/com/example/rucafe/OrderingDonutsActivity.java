@@ -31,6 +31,7 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
     public static ArrayList<Donut> donuts = new ArrayList<>();
     DonutsAdapter adapter;
     static HashMap<String, Integer> donutsOrdered = new HashMap<>();
+    private static final int zeroQuantity = 0;
 
     /**
      * Get the references of all instances of Views defined in the layout file, set up the list of
@@ -58,20 +59,20 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
      * Helper method to set up the data (the Model of the MVC).
      */
     private void setUpMenuItems() {
-        donuts.add(new Donut("Donut Hole", "Chocolate", 0, R.drawable.choc_donut_holes));
-        donuts.add(new Donut("Donut Hole", "Glazed", 0, R.drawable.glazed_donut_holes));
-        donuts.add(new Donut("Donut Hole", "Jelly", 0, R.drawable.jelly_donut_holes));
-        donuts.add(new Donut("Donut Hole", "Blueberry-Glazed", 0, R.drawable.blueberry_donut_holes));
+        donuts.add(new Donut("Donut Hole", "Chocolate", zeroQuantity, R.drawable.choc_donut_holes));
+        donuts.add(new Donut("Donut Hole", "Glazed", zeroQuantity, R.drawable.glazed_donut_holes));
+        donuts.add(new Donut("Donut Hole", "Jelly", zeroQuantity, R.drawable.jelly_donut_holes));
+        donuts.add(new Donut("Donut Hole", "Blueberry-Glazed", zeroQuantity, R.drawable.blueberry_donut_holes));
 
-        donuts.add(new Donut("Yeast", "Oreo", 0, R.drawable.oreo_yeast_donut));
-        donuts.add(new Donut("Yeast", "Strawberry-Frosted", 0, R.drawable.strawberry_yeast_donut));
-        donuts.add(new Donut("Yeast", "Vanilla-Frosted", 0, R.drawable.vanilla_yeast_donut));
-        donuts.add(new Donut("Yeast", "Chocolate-Creme", 0, R.drawable.choc_creme_donut));
+        donuts.add(new Donut("Yeast", "Oreo", zeroQuantity, R.drawable.oreo_yeast_donut));
+        donuts.add(new Donut("Yeast", "Strawberry-Frosted", zeroQuantity, R.drawable.strawberry_yeast_donut));
+        donuts.add(new Donut("Yeast", "Vanilla-Frosted", zeroQuantity, R.drawable.vanilla_yeast_donut));
+        donuts.add(new Donut("Yeast", "Chocolate-Creme", zeroQuantity, R.drawable.choc_creme_donut));
 
-        donuts.add(new Donut("Cake", "Powdered", 0, R.drawable.powdered_cake_donut));
-        donuts.add(new Donut("Cake", "Old-Fashioned", 0, R.drawable.old_fashioned_cake_donut));
-        donuts.add(new Donut("Cake", "Cinnamon-Sugar", 0, R.drawable.cinnamon_sugar_cake_donut));
-        donuts.add(new Donut("Cake", "Lemon", 0, R.drawable.lemon_cake_donut));
+        donuts.add(new Donut("Cake", "Powdered", zeroQuantity, R.drawable.powdered_cake_donut));
+        donuts.add(new Donut("Cake", "Old-Fashioned", zeroQuantity, R.drawable.old_fashioned_cake_donut));
+        donuts.add(new Donut("Cake", "Cinnamon-Sugar", zeroQuantity, R.drawable.cinnamon_sugar_cake_donut));
+        donuts.add(new Donut("Cake", "Lemon", zeroQuantity, R.drawable.lemon_cake_donut));
     }
 
     /**
@@ -99,9 +100,13 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
         alert.setMessage("Add Donut(s) to Order?");
 
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            /**
+             * event handler for when user clicks yes button in alert dialog
+             * @param dialog DialogInterface
+             * @param which int
+             */
             public void onClick(DialogInterface dialog, int which) {
                 addToOrder();
-
                 donutsOrdered.clear();
                 resetMenuItems();
                 adapter.notifyDataSetChanged();
@@ -111,6 +116,11 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
             }
 
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            /**
+             * event handler for when user clicks no button in alert dialog
+             * @param dialog DialogInterface
+             * @param which int
+             */
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(view.getContext(),
                         "Donut Order not added.", Toast.LENGTH_LONG).show();

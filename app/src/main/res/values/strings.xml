@@ -37,4 +37,5 @@
     <string name="deleteItem1">To delete an item from order,</string>
     <string name="deleteItem2" />
     <string name="deleteItem3">please select an item.</string>
+    <string name="donut_image">Donut Image</string>
 </resources>

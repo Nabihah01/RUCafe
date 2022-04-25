@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/whipped_checkbox" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/coffeeImage"
         android:layout_width="290dp"
         android:layout_height="150dp"
         android:layout_marginStart="75dp"
@@ -55,7 +55,7 @@
         android:text="@string/coffeeLabel"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textSize="50sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/coffeeImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +115,7 @@
         android:text="@string/whipped_cream"
         app:layout_constraintBottom_toTopOf="@+id/size_spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/coffeeImage" />
 
     <CheckBox
         android:id="@+id/milk_checkbox"
@@ -130,7 +130,7 @@
         app:layout_constraintEnd_toStartOf="@+id/syrup_checkbox"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/coffeeImage" />
 
     <CheckBox
         android:id="@+id/syrup_checkbox"
@@ -142,7 +142,7 @@
         android:onClick="syrupClicked"
         android:text="@string/syrup"
         app:layout_constraintEnd_toStartOf="@+id/whipped_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/coffeeImage" />
 
     <CheckBox
         android:id="@+id/cream_checkbox"

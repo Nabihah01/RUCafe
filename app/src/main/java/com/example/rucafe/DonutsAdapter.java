@@ -25,6 +25,11 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
     private ArrayList<Donut> items;
     private static final int zeroQuantity = 0;
 
+    /**
+     * Constructor for DonutsAdapter
+     * @param context context of current state of application
+     * @param items arraylist of items to populate recycler view with
+     */
     public DonutsAdapter(Context context, ArrayList<Donut> items) {
         this.context = context;
         this.items = items;
@@ -78,6 +83,11 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
         private Button btn_add, btn_minus;
         private ConstraintLayout parentLayout; //this is the row layout
 
+        /**
+         * constructor for ItemsHolder class
+         * @param itemView instance of View
+         * @param donutsAdapter instance of DonutsAdapter
+         */
         public ItemsHolder(@NonNull View itemView, DonutsAdapter donutsAdapter) {
             super(itemView);
             this.donutsAdapter = donutsAdapter;

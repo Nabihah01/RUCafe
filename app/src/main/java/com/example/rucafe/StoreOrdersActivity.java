@@ -78,6 +78,11 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
         alert.setMessage("Cancel Order?");
         //handle the "YES" click
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            /**
+             * event handler for when user clicks yes button in alert dialog
+             * @param dialog DialogInterface
+             * @param which int
+             */
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(v.getContext(),
                         "Order Cancelled.", Toast.LENGTH_LONG).show();
@@ -88,6 +93,11 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
             }
             //handle the "NO" click
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            /**
+             * event handler for when user clicks no button in alert dialog
+             * @param dialog DialogInterface
+             * @param which int
+             */
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(v.getContext(),
                         "Order Not Cancelled.", Toast.LENGTH_LONG).show();
@@ -136,11 +146,22 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
 
     }
 
+    /**
+     * event handler for when nothing is selected in spinner
+     * @param adapterView
+     */
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 
+    /**
+     * event handler for when item in list view is clicked
+     * @param adapterView
+     * @param view
+     * @param i
+     * @param l
+     */
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
     }
@@ -165,6 +186,6 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
      * @return total with sales tax applied
      */
     private double calculateTotal(double price){
-        return price*salesTax + price;
+        return price * salesTax + price;
     }
 }

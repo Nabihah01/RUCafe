@@ -1,7 +1,5 @@
 package com.example.rucafe;
 
-import java.util.ArrayList;
-
 /**
  * This class extends MenuItem and represents a donut object,
  * has three attributes- type, quantity, and flavor
@@ -30,6 +28,13 @@ public class Donut extends MenuItem {
         this.donutFlavor = donutFlavor;
     }
 
+    /**
+     * Constructor for donut
+     * @param donutType type of Donut
+     * @param donutFlavor flavor of Donut
+     * @param donutQuantity quantity of donut
+     * @param donutImage image of donut
+     */
     public Donut(String donutType, String donutFlavor, int donutQuantity, int donutImage){
         this.donutType = donutType;
         this.donutQuantity = donutQuantity;
@@ -54,6 +59,10 @@ public class Donut extends MenuItem {
         }
     }
 
+    /**
+     * returns price for one yest donut, cake donut, or one donut hole
+     * @return double, price of donut
+     */
     public double oneItemPrice() {
         if(donutType.equals("Yeast")){
             return YEAST;
@@ -65,18 +74,34 @@ public class Donut extends MenuItem {
         }
     }
 
+    /**
+     * returns the donut flavor and type as one String
+     * @return String, representing donut flavor and type
+     */
     public String getDonutTypeandFlavor() {
         return donutFlavor + " " + donutType;
     }
 
+    /**
+     * gets image corresponding to donut item
+     * @return int, representing an image of a donut
+     */
     public int getImage() {
         return donutImage;
     }
 
+    /**
+     * gets quantity of donut
+     * @return int, number of donuts
+     */
     public int getDonutQuantity() {
         return donutQuantity;
     }
 
+    /**
+     * sets the donut quantity to number passed in as argument
+     * @param quantity number of donuts
+     */
     public void setDonutQuantity(int quantity) {
         this.donutQuantity = quantity;
     }

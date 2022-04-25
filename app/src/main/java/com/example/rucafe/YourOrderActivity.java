@@ -30,7 +30,7 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
     private static final double sales_tax = 6.625 / 100;
 
     /**
-     * overrirdes onCreate method and initializes listview to display user's order
+     * overrides onCreate method and initializes listview to display user's order
      * @param savedInstanceState
      */
     @Override
@@ -97,6 +97,11 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
         alert.setTitle("Place Order");
         //handle the "YES" click
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            /**
+             * event handler for when user clicks yes button in alert dialog
+             * @param dialog DialogInterface
+             * @param which int
+             */
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(v.getContext(),
                         "Order Placed.", Toast.LENGTH_LONG).show();
@@ -115,6 +120,11 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
             }
             //handle the "NO" click
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            /**
+             * event handler for when user clicks no button in alert dialog
+             * @param dialog DialogInterface
+             * @param which int
+             */
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(v.getContext(),
                         "Order Not Placed.", Toast.LENGTH_LONG).show();
@@ -137,6 +147,11 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
         alert.setTitle("Delete from Order");
         alert.setMessage("Delete Selected Item from Order?");
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            /**
+             * event handler for when user clicks yes button in alert dialog
+             * @param dialog DialogInterface
+             * @param which int
+             */
             public void onClick(DialogInterface dialog, int which) {
                 //remove the order that was selected
                 MenuItem item = MainActivity.yourOrder.getOrders().get(i);
@@ -147,6 +162,11 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
                         "Item deleted from order.", Toast.LENGTH_LONG).show();
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            /**
+             * event handler for when user clicks no button in alert dialog
+             * @param dialog DialogInterface
+             * @param which int
+             */
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(adapterView.getContext(),
                         "Item not deleted from order.", Toast.LENGTH_LONG).show();
@@ -154,7 +174,6 @@ public class YourOrderActivity extends AppCompatActivity implements AdapterView.
         });
         AlertDialog dialog = alert.create();
         dialog.show();
-
     }
 
 }

@@ -55,11 +55,11 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
         coffeeTotal.setText(String.valueOf(defaultTotal));
         coffeeQuantity = findViewById(R.id.coffee_quantity);
         coffeeQuantity.setText(String.valueOf(quantity));
+
         Button add = findViewById(R.id.add_coffee);
         Button remove = findViewById(R.id.remove_coffee);
         add.setOnClickListener(this);
         remove.setOnClickListener(this);
-
     }
 
     /**
@@ -100,13 +100,16 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
      */
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        //useful methods: getSelectedItemPosition() getSelectedItem() getSelectedItemId() getSelectedView()
         size = adapterView.getSelectedItem().toString();
         Coffee coffeeOrder = new Coffee(size, addIns, quantity);
         double price = coffeeOrder.itemPrice();
         coffeeTotal.setText(String.valueOf(df.format(price)));
     }
 
+    /**
+     * event handler for when nothing is selected in spinner
+     * @param adapterView
+     */
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -217,11 +220,17 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
             return;
         }
         Coffee coffeeOrder = new Coffee(size, (ArrayList<String>) addIns.clone(), quantity);
+
         AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
         alert.setTitle("Add To Order");
         alert.setMessage(coffeeOrder.toString());
         //handle the "YES" click
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            /**
+             * event handler for when user clicks yes button in alert dialog
+             * @param dialog DialogInterface
+             * @param which int
+             */
             public void onClick(DialogInterface dialog, int which) {
                 MainActivity.yourOrder.add(coffeeOrder);
                 Toast.makeText(v.getContext(),
@@ -229,6 +238,11 @@ public class OrderingCoffeeActivity extends AppCompatActivity implements Adapter
             }
             //handle the "NO" click
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            /**
+             * event handler for when user clicks no button in alert dialog
+             * @param dialog DialogInterface
+             * @param which int
+             */
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(v.getContext(),
                         coffeeOrder.toString() + " not added.", Toast.LENGTH_LONG).show();
