@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolder> {
     private Context context; //need the context to inflate the layout
     //items hold all of our donuts
-    protected ArrayList<Donut> items; //need the data binding to each row of RecyclerView
+    private ArrayList<Donut> items; //need the data binding to each row of RecyclerView
 
     public DonutsAdapter(Context context, ArrayList<Donut> items) {
         this.context = context;
@@ -100,11 +100,13 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int position = getAdapterPosition();
                     HashMap<String, Integer> donutsOrdered = OrderingDonutsActivity.getDonutsOrdered();
+
                     int quantity = Integer.parseInt(donut_quantity.getText().toString());
                     donut_quantity.setText(String.valueOf(quantity + 1));
                     donutsOrdered.put(String.valueOf(donut_flavor.getText()), quantity + 1);
+
+                    int position = getAdapterPosition();
                     donutsAdapter.items.get(position).setDonutQuantity(quantity + 1);
                 }
             });
@@ -114,7 +116,6 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
             btn_minus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int position = getAdapterPosition();
                     HashMap<String, Integer> donutsOrdered = OrderingDonutsActivity.getDonutsOrdered();
                     int quantity = Integer.parseInt(donut_quantity.getText().toString());
                     if(quantity == 0) {
@@ -122,6 +123,8 @@ public class DonutsAdapter extends RecyclerView.Adapter<DonutsAdapter.ItemsHolde
                     } else {
                         donut_quantity.setText(String.valueOf(quantity - 1));
                         donutsOrdered.put(String.valueOf(donut_flavor.getText()), quantity - 1);
+
+                        int position = getAdapterPosition();
                         donutsAdapter.items.get(position).setDonutQuantity(quantity - 1);
                     }
                 }
