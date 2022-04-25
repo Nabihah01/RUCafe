@@ -92,8 +92,11 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
                 addToOrder();
                 //reset everything
                 donutsOrdered.clear();
+                //donuts.clear();
                 resetMenuItems();
                 adapter.notifyDataSetChanged();
+                //finish();
+                //startActivity(getIntent());
                 //IDK WHAT TO DOOOO, IT KEEPS POPULATING TWICE
 
 //                donuts.clear();
