@@ -24,7 +24,6 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
 
     public static ArrayList<Donut> donuts = new ArrayList<>();
     DonutsAdapter adapter;
-    RecyclerView donutsRV;
     static HashMap<String, Integer> donutsOrdered = new HashMap<>();
 
     /**
@@ -38,7 +37,7 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.ordering_donuts);
 
         // Lookup the recyclerview in activity layout
-        donutsRV = (RecyclerView) findViewById(R.id.donutsRecyclerView);
+        RecyclerView donutsRV = (RecyclerView) findViewById(R.id.donutsRecyclerView);
 
         // Initialize donuts
         setUpMenuItems();
@@ -94,8 +93,8 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
                 //reset everything
                 donutsOrdered.clear();
                 resetMenuItems();
-
-                //IDK WHAT TO DOOOO, IT KEEPS POPULATING TWICE 
+                adapter.notifyDataSetChanged();
+                //IDK WHAT TO DOOOO, IT KEEPS POPULATING TWICE
 
 //                donuts.clear();
 //                //adapter.notifyDataSetChanged();
