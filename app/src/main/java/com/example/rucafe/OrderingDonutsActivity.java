@@ -56,6 +56,17 @@ public class OrderingDonutsActivity extends AppCompatActivity implements View.On
     }
 
     /**
+     * overrides onResume method
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        donuts.clear();
+        setUpMenuItems();
+        adapter.notifyDataSetChanged();
+    }
+
+    /**
      * Helper method to set up the data (the Model of the MVC).
      */
     private void setUpMenuItems() {
