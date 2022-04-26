@@ -71,6 +71,7 @@ public class Order implements Customizable {
 
     /**
      * setter method for total amount for order
+     * @param total a double representing total
      */
     public void setTotal(double total) {
         this.total = total;
